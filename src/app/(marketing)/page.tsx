@@ -115,6 +115,19 @@ export default function Home() {
           </div>
           <div className="flex flex-col gap-8">
             <FooterLinkGroup
+              title="Company"
+              links={[
+                { label: "About Us", href: "#" },
+                { label: "Affiliate", href: "#" },
+                { label: "Twitter", href: "#" },
+                { label: "Facebook", href: "#" },
+                { label: "Instagram", href: "#" },
+                { label: "Terms of Service", href: "#" },
+              ]}
+            />
+          </div>
+          <div className="flex flex-col gap-8">
+            <FooterLinkGroup
               title="Features"
               links={[{ label: "Adminja Discounts", href: "#" }]}
             />
@@ -124,17 +137,6 @@ export default function Home() {
                 { label: "Salary Converter", href: "#" },
                 { label: "Coupn Generator", href: "#" },
                 { label: "Stripe App", href: "#" },
-              ]}
-            />
-            <FooterLinkGroup
-              title="Company"
-              links={[
-                { label: "About Us", href: "#" },
-                { label: "Affiliate", href: "#" },
-                { label: "Twitter", href: "#" },
-                { label: "Facebook", href: "#" },
-                { label: "Instagram", href: "#" },
-                { label: "Terms of Service", href: "#" },
               ]}
             />
           </div>
