@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { SignUpButton } from "@clerk/nextjs";
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon, CheckIcon } from "lucide-react";
 import Link from "next/link";
 import { NeonIcon } from "./_icons/Neon";
 import { ClerkIcon } from "./_icons/Clerk";
@@ -9,10 +9,14 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { formatCompactNumber } from "@/lib/formatter";
+import { ReactNode } from "react";
+import { cn } from "@/lib/utils";
+import { BrandLogo } from "@/components/BrandLogo";
 
 export default function Home() {
   return (
@@ -85,6 +89,83 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <footer className="container pt-16 pb-8 flex flex-col sm:flex-row gap-8 sm:gap-4 justify-between items-start">
+        <Link href="/">
+          <BrandLogo />
+        </Link>
+        <div className="flex flex-col sm:flex-row gap-8">
+          <div className="flex flex-col gap-8">
+            <FooterLinkGroup
+              title="Help"
+              links={[
+                { label: "Adminja Discounts", href: "#" },
+                { label: "Discount API", href: "#" },
+                { label: "Pricing API", href: "#" },
+              ]}
+            />{" "}
+            <FooterLinkGroup
+              title="Solutions"
+              links={[
+                { label: "Newsletter", href: "#" },
+                { label: "SaaS Business", href: "#" },
+                { label: "Online Courses", href: "#" },
+              ]}
+            />
+          </div>
+          <div className="flex flex-col gap-8">
+            <FooterLinkGroup
+              title="Features"
+              links={[{ label: "Adminja Discounts", href: "#" }]}
+            />
+            <FooterLinkGroup
+              title="Tools"
+              links={[
+                { label: "Salary Converter", href: "#" },
+                { label: "Coupn Generator", href: "#" },
+                { label: "Stripe App", href: "#" },
+              ]}
+            />
+            <FooterLinkGroup
+              title="Company"
+              links={[
+                { label: "About Us", href: "#" },
+                { label: "Affiliate", href: "#" },
+                { label: "Twitter", href: "#" },
+                { label: "Facebook", href: "#" },
+                { label: "Instagram", href: "#" },
+                { label: "Terms of Service", href: "#" },
+              ]}
+            />
+          </div>
+          <div className="flex flex-col gap-8">
+            <FooterLinkGroup
+              title="Integrations"
+              links={[
+                { label: "Lemon Squeezy", href: "#" },
+                { label: "Gumroad", href: "#" },
+                { label: "Stripe", href: "#" },
+                { label: "Paypal", href: "#" },
+                { label: "Shopify", href: "#" },
+                { label: "Chargebee", href: "#" },
+                { label: "Paddle", href: "#" },
+              ]}
+            />
+            <FooterLinkGroup
+              title="Tutorials"
+              links={[
+                { label: "Any Website", href: "#" },
+                { label: "Lemon Squeezy", href: "#" },
+                { label: "Gumroad", href: "#" },
+                { label: "Stripe", href: "#" },
+
+                { label: "Chargebee", href: "#" },
+                { label: "Paddle", href: "#" },
+              ]}
+            />
+          </div>
+        </div>
+      </footer>
     </>
   );
 }
@@ -110,9 +191,61 @@ function PricingCard({
       </CardHeader>
       <CardContent>
         <SignUpButton>
-          <Button>Get Started</Button>
+          <Button
+            className="text-lg w-full"
+            variant={isMostPopular ? "accent" : "default"}
+          >
+            Get Started
+          </Button>
         </SignUpButton>
       </CardContent>
+      <CardFooter className="flex flex-col gap-4 items-start">
+        <Feature className="font-bold">
+          {maxNumberOfProducts}{" "}
+          {maxNumberOfProducts === 1 ? "product" : "products"}
+        </Feature>
+
+        <Feature>Adminja Discounts</Feature>
+        {canAccessAnalytics && <Feature>Access to Advanced Analytics</Feature>}
+        {canCustomizeBanner && <Feature>Customizable Banner</Feature>}
+        {canRemoveBranding && <Feature>Remove Adminja Branding</Feature>}
+      </CardFooter>
     </Card>
+  );
+}
+
+function Feature({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={cn("flex items-center gap-2", className)}>
+      <CheckIcon className="size-6 stroke-white/60 bg-accent/60 rounded-full p-0.5" />
+      <span> {children}</span>
+    </div>
+  );
+}
+
+function FooterLinkGroup({
+  title,
+  links,
+}: {
+  title: string;
+  links: { label: string; href: string }[];
+}) {
+  return (
+    <div className="flex flex-col gap-4">
+      <h3 className="text-lg font-bold">{title}</h3>
+      <ul className="flex flex-col gap-2 text-sm">
+        {links.map((link) => (
+          <li key={link.href}>
+            <Link href={link.href}>{link.label}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
