@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { SignUpButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
 import { ArrowRightIcon, CheckIcon } from "lucide-react";
 import Link from "next/link";
 import { NeonIcon } from "./_icons/Neon";
@@ -29,11 +29,22 @@ export default function Home() {
           Optimize your product pricing across countries to maximize sales.
           Capture 83% of the untapped market with location-base dynamic pricing
         </p>
-        <SignUpButton>
-          <Button className="text-lg p-6 rounded-xl flex gap-2">
-            Get Started For Free <ArrowRightIcon className="size-5" />
-          </Button>
-        </SignUpButton>
+        <SignedIn>
+          <Link href="/dashboard">
+            <Button className="text-lg p-6 rounded-xl flex gap-2">
+              Go to Dashboard
+              <ArrowRightIcon className="size-5" />
+            </Button>
+          </Link>
+        </SignedIn>
+        <SignedOut>
+          <SignInButton>
+            <Button className="text-lg p-6 rounded-xl flex gap-2">
+              Get Started For Free
+              <ArrowRightIcon className="size-5" />
+            </Button>
+          </SignInButton>
+        </SignedOut>
       </section>
 
       <section className="bg-accent text-foreground">
